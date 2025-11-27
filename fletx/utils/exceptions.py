@@ -164,7 +164,11 @@ class NetworkError(FletXError):
     """
     Exception raised when there's a network error with http operations.
     """
-    pass
+    def __init__(self, message=None, original_exception=None):
+        self.message = message
+        self.original_exception = original_exception
+        super().__init__(self.message or "NetworkError:")
+
 
 
 ####
@@ -174,7 +178,12 @@ class RateLimitError(FletXError):
     """
     Exception raised when there's a rate limit error with http operations.
     """
-    pass
+    def __init__(self, message=None, status_code=None, raw_response=None, headers=None):
+        self.message = message
+        self.status_code = status_code
+        self.raw_response = raw_response
+        self.headers = headers
+        super().__init__(self.message or "RateLimitError:")
 
 
 ####
@@ -184,4 +193,8 @@ class APIError(FletXError):
     """
     Exception raised when there's an API error with http operations.
     """
-    pass
+    def __init__(self, message=None, status_code=None, response_data=None):
+        self.message = message
+        self.status_code = status_code
+        self.response_data = response_data
+        super().__init__(self.message or "APIError:")

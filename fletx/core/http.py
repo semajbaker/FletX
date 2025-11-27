@@ -624,7 +624,7 @@ class HTTPClient:
         # Apply middlewares
         request_kwargs = await self._apply_middlewares_before(
             method, url, headers=merged_headers, params=params, 
-            data=data, json=json_data, files=files, **kwargs
+            data=data, json_data=json_data, files=files, **kwargs
         )
         
         # Rate limiting
